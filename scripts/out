@@ -1,0 +1,300 @@
+# @ivanv: Shouldn't supress warnings
+dtc -q -I dts -O dtb board/qemu_arm_virt_hyp/images/linux.dts > build/linux.dtb
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/vmm.c -o build/vmm.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/util/printf.c -o build/printf.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/psci.c -o build/psci.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/smc.c -o build/smc.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/fault.c -o build/fault.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/util/util.c -o build/util.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/vgic/vgic.c -o build/vgic.o
+aarch64-linux-gnu-gcc -c -g3 -x assembler-with-cpp -mcpu=cortex-a53 -DVM_KERNEL_IMAGE_PATH=\"board/qemu_arm_virt_hyp/images/linux\" -DVM_DTB_IMAGE_PATH=\"build/linux.dtb\" -DVM_INITRD_IMAGE_PATH=\"board/qemu_arm_virt_hyp/images/rootfs.cpio.gz\" src/global_data.S -o build/global_data.o
+aarch64-linux-gnu-gcc -c -mstrict-align -nostdlib -ffreestanding -g3 -Wall -Wno-unused-function -Werror -I/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include -DBOARD_qemu_arm_virt_hyp -DARCH_aarch64 -mcpu=cortex-a53 src/vgic/vgic_v2.c -o build/vgic_v2.o
+aarch64-linux-gnu-ld -L/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/lib build/vmm.o build/printf.o build/psci.o build/smc.o build/fault.o build/util.o build/vgic.o build/global_data.o build/vgic_v2.o -lsel4cp -Tsel4cp.ld -o build/vmm.elf
+/home/colored-dye/Code/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/bin/sel4cp board/qemu_arm_virt_hyp/systems/simple.system --search-path build board/qemu_arm_virt_hyp/images --board qemu_arm_virt_hyp --config debug -o build/loader.img -r build/report.txt
+BUILT: system_cnode_size=2 built_system.number_of_system_caps=8443 invocation_table_size=4096 built_system.invocation_data_size=293184
+BUILT: system_cnode_size=16384 built_system.number_of_system_caps=8514 invocation_table_size=294912 built_system.invocation_data_size=293184
+qemu-system-aarch64 -machine virt,virtualization=on,highmem=off,secure=off -cpu cortex-a53 -serial mon:stdio -device loader,file=build/loader.img,addr=0x70000000,cpu-num=0 -m size=2G -nographic
+LDR|INFO: altloader for seL4 starting
+LDR|INFO: Flags:                0x0000000000000001
+             seL4 configured as hypervisor
+LDR|INFO: Kernel:      entry:   0x0000008060000000
+LDR|INFO: Root server: physmem: 0x000000006123e000 -- 0x0000000061245000
+LDR|INFO:              virtmem: 0x000000008a000000 -- 0x000000008a007000
+LDR|INFO:              entry  : 0x000000008a000000
+LDR|INFO: region: 0x00000000   addr: 0x0000000060000000   size: 0x000000000024c000   offset: 0x0000000000000000   type: 0x0000000000000001
+LDR|INFO: region: 0x00000001   addr: 0x000000006123e000   size: 0x0000000000006820   offset: 0x000000000024c000   type: 0x0000000000000001
+LDR|INFO: region: 0x00000002   addr: 0x000000006024c000   size: 0x0000000000047940   offset: 0x0000000000252820   type: 0x0000000000000001
+LDR|INFO: region: 0x00000003   addr: 0x0000000060294000   size: 0x0000000000014380   offset: 0x000000000029a160   type: 0x0000000000000001
+LDR|INFO: region: 0x00000004   addr: 0x00000000602a9000   size: 0x0000000000f940d0   offset: 0x00000000002ae4e0   type: 0x0000000000000001
+LDR|INFO: copying region 0x00000000
+LDR|INFO: copying region 0x00000001
+LDR|INFO: copying region 0x00000002
+LDR|INFO: copying region 0x00000003
+LDR|INFO: copying region 0x00000004
+LDR|INFO: Setting all interrupts to Group 1
+LDR|INFO: GICv2 ITLinesNumber: 0x00000000
+LDR|INFO: CurrentEL=EL2
+LDR|INFO: enabling MMU
+LDR|INFO: jumping to kernel
+Bootstrapping kernel
+Warning: Could not infer GIC interrupt target ID, assuming 0.
+available phys memory regions: 1
+  [60000000..c0000000]
+reserved virt address space regions: 3
+  [8060000000..806024c000]
+  [806024c000..806123e000]
+  [806123e000..8061245000]
+Booting all finished, dropped to user space
+MON|INFO: seL4 Core Platform Bootstrap
+MON|INFO: bootinfo untyped list matches expected list
+MON|INFO: Number of bootstrap invocations: 0x0000000c
+MON|INFO: Number of system invocations:    0x00000feb
+MON|INFO: completed bootstrap invocations
+MON|INFO: completed system invocations
+VMM|INFO: starting "VMM"
+VMM|INFO: Copying guest kernel image to 0x40080000 (0xeb1200 bytes)
+VMM|INFO: Copying guest DTB to 0x4f000000 (0x7e0 bytes)
+VMM|INFO: Copying guest initial RAM disk to 0x4d700000 (0xdedd9 bytes)
+VMM|INFO: initialised virtual GICv2 driver
+TCB registers:
+    pc:   0x0000000040080000
+    sp:   0x0000000000000000
+    spsr: 0x0000000000000005
+    x0:   0x000000004f000000
+    x1:   0x0000000000000000
+    x2:   0x0000000000000000
+    x3:   0x0000000000000000
+    x4:   0x0000000000000000
+    x5:   0x0000000000000000
+    x6:   0x0000000000000000
+    x7:   0x0000000000000000
+    x8:   0x0000000000000000
+    x16:  0x0000000000000000
+    x17:  0x0000000000000000
+    x18:  0x0000000000000000
+    x29:  0x0000000000000000
+    x30:  0x0000000000000000
+    x9:   0x0000000000000000
+    x10:  0x0000000000000000
+    x11:  0x0000000000000000
+    x12:  0x0000000000000000
+    x13:  0x0000000000000000
+    x14:  0x0000000000000000
+    x15:  0x0000000000000000
+    x19:  0x0000000000000000
+    x20:  0x0000000000000000
+    x21:  0x0000000000000000
+    x22:  0x0000000000000000
+    x23:  0x0000000000000000
+    x24:  0x0000000000000000
+    x25:  0x0000000000000000
+    x26:  0x0000000000000000
+    x27:  0x0000000000000000
+    x28:  0x0000000000000000
+VMM|INFO: completed all initialisation
+VMM|INFO: starting guest at 0x40080000, DTB at 0x4f000000
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.9.189+ (alisonf@shinyu-un) (gcc version 6.3.0 20170516 (Debian 6.3.0-18) ) #16 SMP Tue Feb 25 14:14:50 AEDT 2020
+[    0.000000] Boot CPU: AArch64 Processor [410fd034]
+[    0.000000] earlycon: pl11 at MMIO 0x0000000009000000 (options '')
+[    0.000000] bootconsole [pl11] enabled
+[    0.000000] efi: Getting EFI parameters from FDT:
+[    0.000000] efi: UEFI not found.
+[    0.000000] On node 0 totalpages: 65536
+[    0.000000]   DMA zone: 1024 pages used for memmap
+[    0.000000]   DMA zone: 0 pages reserved
+[    0.000000]   DMA zone: 65536 pages, LIFO batch:15
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.0 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: Trusted OS migration not required
+[    0.000000] psci: SMC Calling Convention v1.0
+[    0.000000] percpu: Embedded 22 pages/cpu s51608 r8192 d30312 u90112
+[    0.000000] pcpu-alloc: s51608 r8192 d30312 u90112 alloc=22*4096
+[    0.000000] pcpu-alloc: [0] 0 
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] CPU features: enabling workaround for ARM erratum 845719
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 64512
+[    0.000000] Kernel command line: earlycon=pl011,0x9000000 earlyprintk=serial debug loglevel=8
+[    0.000000] PID hash table entries: 1024 (order: 1, 8192 bytes)
+[    0.000000] Dentry cache hash table entries: 32768 (order: 6, 262144 bytes)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 5, 131072 bytes)
+[    0.000000] Memory: 228704K/262144K available (7484K kernel code, 1220K rwdata, 2524K rodata, 3776K init, 543K bss, 33440K reserved, 0K cma-reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     modules : 0xffff000000000000 - 0xffff000008000000   (   128 MB)
+[    0.000000]     vmalloc : 0xffff000008000000 - 0xffff7dffbfff0000   (129022 GB)
+[    0.000000]       .text : 0xffff000008080000 - 0xffff0000087d0000   (  7488 KB)
+[    0.000000]     .rodata : 0xffff0000087d0000 - 0xffff000008a50000   (  2560 KB)
+[    0.000000]       .init : 0xffff000008a50000 - 0xffff000008e00000   (  3776 KB)
+[    0.000000]       .data : 0xffff000008e00000 - 0xffff000008f31200   (  1221 KB)
+[    0.000000]        .bss : 0xffff000008f31200 - 0xffff000008fb9034   (   544 KB)
+[    0.000000]     fixed   : 0xffff7dfffe7fb000 - 0xffff7dfffec00000   (  4116 KB)
+[    0.000000]     PCI I/O : 0xffff7dfffee00000 - 0xffff7dffffe00000   (    16 MB)
+[    0.000000]     vmemmap : 0xffff7e0000000000 - 0xffff800000000000   (  2048 GB maximum)
+[    0.000000]               0xffff7e0000000000 - 0xffff7e0000400000   (     4 MB actual)
+[    0.000000]     memory  : 0xffff800000000000 - 0xffff800010000000   (   256 MB)
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000]  Build-time adjustment of leaf fanout to 64.
+[    0.000000]  RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=1
+[    0.000000] NR_IRQS:64 nr_irqs:64 0
+[    0.000000] >>>>>> gic cpu init | CPU 0 | cpu_mask 0x1
+[    0.000000] arm_arch_timer: Architected cp15 timer(s) running at 62.50MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1cd42e208c, max_idle_ns: 881590405314 ns
+[    0.000205] sched_clock: 56 bits at 62MHz, resolution 16ns, wraps every 4398046511096ns
+[    0.026738] Console: colour dummy device 80x25
+[    0.027178] console [tty0] enabled
+[    0.029254] bootconsole [pl11] disabled
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.9.189+ (alisonf@shinyu-un) (gcc version 6.3.0 20170516 (Debian 6.3.0-18) ) #16 SMP Tue Feb 25 14:14:50 AEDT 2020
+[    0.000000] Boot CPU: AArch64 Processor [410fd034]
+[    0.000000] earlycon: pl11 at MMIO 0x0000000009000000 (options '')
+[    0.000000] bootconsole [pl11] enabled
+[    0.000000] efi: Getting EFI parameters from FDT:
+[    0.000000] efi: UEFI not found.
+[    0.000000] On node 0 totalpages: 65536
+[    0.000000]   DMA zone: 1024 pages used for memmap
+[    0.000000]   DMA zone: 0 pages reserved
+[    0.000000]   DMA zone: 65536 pages, LIFO batch:15
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.0 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: Trusted OS migration not required
+[    0.000000] psci: SMC Calling Convention v1.0
+[    0.000000] percpu: Embedded 22 pages/cpu s51608 r8192 d30312 u90112
+[    0.000000] pcpu-alloc: s51608 r8192 d30312 u90112 alloc=22*4096
+[    0.000000] pcpu-alloc: [0] 0 
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] CPU features: enabling workaround for ARM erratum 845719
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 64512
+[    0.000000] Kernel command line: earlycon=pl011,0x9000000 earlyprintk=serial debug loglevel=8
+[    0.000000] PID hash table entries: 1024 (order: 1, 8192 bytes)
+[    0.000000] Dentry cache hash table entries: 32768 (order: 6, 262144 bytes)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 5, 131072 bytes)
+[    0.000000] Memory: 228704K/262144K available (7484K kernel code, 1220K rwdata, 2524K rodata, 3776K init, 543K bss, 33440K reserved, 0K cma-reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     modules : 0xffff000000000000 - 0xffff000008000000   (   128 MB)
+[    0.000000]     vmalloc : 0xffff000008000000 - 0xffff7dffbfff0000   (129022 GB)
+[    0.000000]       .text : 0xffff000008080000 - 0xffff0000087d0000   (  7488 KB)
+[    0.000000]     .rodata : 0xffff0000087d0000 - 0xffff000008a50000   (  2560 KB)
+[    0.000000]       .init : 0xffff000008a50000 - 0xffff000008e00000   (  3776 KB)
+[    0.000000]       .data : 0xffff000008e00000 - 0xffff000008f31200   (  1221 KB)
+[    0.000000]        .bss : 0xffff000008f31200 - 0xffff000008fb9034   (   544 KB)
+[    0.000000]     fixed   : 0xffff7dfffe7fb000 - 0xffff7dfffec00000   (  4116 KB)
+[    0.000000]     PCI I/O : 0xffff7dfffee00000 - 0xffff7dffffe00000   (    16 MB)
+[    0.000000]     vmemmap : 0xffff7e0000000000 - 0xffff800000000000   (  2048 GB maximum)
+[    0.000000]               0xffff7e0000000000 - 0xffff7e0000400000   (     4 MB actual)
+[    0.000000]     memory  : 0xffff800000000000 - 0xffff800010000000   (   256 MB)
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000]  Build-time adjustment of leaf fanout to 64.
+[    0.000000]  RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=1
+[    0.000000] NR_IRQS:64 nr_irqs:64 0
+[    0.000000] >>>>>> gic cpu init | CPU 0 | cpu_mask 0x1
+[    0.000000] arm_arch_timer: Architected cp15 timer(s) running at 62.50MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1cd42e208c, max_idle_ns: 881590405314 ns
+[    0.000205] sched_clock: 56 bits at 62MHz, resolution 16ns, wraps every 4398046511096ns
+[    0.026738] Console: colour dummy device 80x25
+[    0.027178] console [tty0] enabled
+[    0.029254] bootconsole [pl11] disabled
+[    0.031608] Calibrating delay loop (skipped), value calculated using timer frequency.. 125.00 BogoMIPS (lpj=250000)
+[    0.032176] pid_max: default: 32768 minimum: 301
+[    0.039236] Security Framework initialized
+[    0.039576] Yama: becoming mindful.
+[    0.042068] AppArmor: AppArmor disabled by boot time parameter
+[    0.044224] Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+[    0.044380] Mountpoint-cache hash table entries: 512 (order: 0, 4096 bytes)
+[    0.085933] ftrace: allocating 26505 entries in 104 pages
+[    1.090600] ASID allocator initialised with 32768 entries
+[    1.120350] EFI services will not be available.
+[    1.130448] Brought up 1 CPUs
+[    1.130614] SMP: Total of 1 processors activated.
+[    1.131192] CPU features: detected feature: 32-bit EL0 Support
+[    1.131376] CPU features: detected feature: Kernel page table isolation (KPTI)
+[    1.158745] CPU: All CPU(s) started at EL1
+[    1.159509] alternatives: patching kernel code
+[    1.191853] devtmpfs: initialized
+[    1.212718] DMI not present or invalid.
+[    1.217867] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    1.219435] futex hash table entries: 256 (order: 3, 32768 bytes)
+[    1.227492] pinctrl core: initialized pinctrl subsystem
+[    1.262389] NET: Registered protocol family 16
+[    1.272452] cpuidle: using governor ladder
+[    1.272831] cpuidle: using governor menu
+[    1.273490] vdso: 2 pages (1 code @ ffff0000087d7000, 1 data @ ffff000008e05000)
+[    1.274323] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    1.277274] DMA: preallocated 256 KiB pool for atomic allocations
+[    1.280173] Serial: AMBA PL011 UART driver
+[    1.311476] 9000000.pl011: ttyAMA0 at MMIO 0x9000000 (irq = 6, base_baud = 0) is a PL011 rev1
+[    1.356638] console [ttyAMA0] enabled
+[    1.410206] HugeTLB registered 2 MB page size, pre-allocated 0 pages
+[    1.429814] ACPI: Interpreter disabled.
+[    1.438789] vgaarb: loaded
+[    1.440676] pps_core: LinuxPPS API ver. 1 registered
+[    1.441321] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    1.444471] PTP clock support registered
+[    1.446246] dmi: Firmware registration failed.
+[    1.469139] clocksource: Switched to clocksource arch_sys_counter
+[    1.661819] VFS: Disk quotas dquot_6.6.0
+[    1.662533] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    1.668536] pnp: PnP ACPI: disabled
+[    1.771739] NET: Registered protocol family 2
+[    1.789887] TCP established hash table entries: 2048 (order: 2, 16384 bytes)
+[    1.790845] TCP bind hash table entries: 2048 (order: 3, 32768 bytes)
+[    1.791984] TCP: Hash tables configured (established 2048 bind 2048)
+[    1.795350] UDP hash table entries: 256 (order: 1, 8192 bytes)
+[    1.796074] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+[    1.803696] NET: Registered protocol family 1
+[    1.806491] PCI: CLS 0 bytes, default 128
+[    1.829561] Unpacking initramfs...
+[    2.094797] Freeing initrd memory: 888K
+[    2.103028] hw perfevents: enabled with armv8_pmuv3 PMU driver, 5 counters available
+[    2.103814] kvm [1]: HYP mode not available
+[    2.150415] audit: initializing netlink subsys (disabled)
+[    2.155144] audit: type=2000 audit(1.140:1): initialized
+[    2.168317] workingset: timestamp_bits=46 max_order=16 bucket_order=0
+[    2.174346] zbud: loaded
+[    2.231550] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 248)
+[    2.235633] io scheduler noop registered
+[    2.236900] io scheduler deadline registered
+[    2.239900] io scheduler cfq registered (default)
+[    2.255719] pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+[    2.256946] pciehp: PCI Express Hot Plug Controller Driver version: 0.4
+[    2.281347] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    2.286901] Serial: AMBA driver
+[    2.290248] msm_serial: driver initialized
+[    2.295277] Unable to detect cache hierarchy for CPU 0
+[    2.298588] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+[    2.299174] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    2.299863] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+[    2.300287] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    2.311457] mousedev: PS/2 mouse device common for all mice
+[    2.331615] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.333410] dmi-sysfs: dmi entry is absent.
+[    2.337520] ipip: IPv4 and MPLS over IPv4 tunneling driver
+[    2.346571] NET: Registered protocol family 10
+[    2.374995] mip6: Mobile IPv6
+[    2.386511] NET: Registered protocol family 17
+[    2.388076] mpls_gso: MPLS GSO support
+[    2.391049] Registered cp15_barrier emulation handler
+[    2.391892] Registered setend emulation handler
+[    2.405850] registered taskstats version 1
+[    2.410891] zswap: loaded using pool lzo/zbud
+[    2.422633] ima: No TPM chip found, activating TPM-bypass!
+[    2.423875] ima: Allocated hash algorithm: sha256
+[    2.437833] hctosys: unable to open rtc device (rtc0)
+[    2.439764] PM: Hibernation image not present or could not be loaded.
+[    3.049557] Freeing unused kernel memory: 3776K
+[    3.441928] uart-pl011 9000000.pl011: no DMA platform data
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Initializing random number generator... [    5.484960] random: dd: uninitialized urandom read (512 bytes read)
+done.
+Starting network: OK
+
+Welcome to Buildroot
+buildroot login: root
+# la
+-sh: la: not found
+# QEMU: Terminated

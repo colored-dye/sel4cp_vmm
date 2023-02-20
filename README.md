@@ -1,3 +1,7 @@
+colored-dye's fork of https://github.com/Ivan-Velickovic/sel4cp_vmm.
+
+Patches in `diffs/`.
+
 # VMM on the seL4 Core Platform
 
 This is an **experimental** Virtual Machine Monitor (VMM) for 64-bit ARM platforms
