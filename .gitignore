@@ -1,1 +1,3 @@
-build/
+/build/
+/seL4/
+/sel4cp/

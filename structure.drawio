@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="9g5R29wDA8VqFA_4upnq" name="Page-1">
+        <mxGraphModel dx="991" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="&lt;span style=&quot;color: rgb(240, 240, 240); font-size: 18px;&quot;&gt;seL4 Hypervisor&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="370" width="400" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;LS1046A/Qemu-arm-virt Platform&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="440" width="700" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Linux VM 1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="300" width="400" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="VMM&lt;br&gt;Rootserver" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="300" width="290" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;fontSize=18;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="420" y="329.5" as="sourcePoint"/>
+                        <mxPoint x="530" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

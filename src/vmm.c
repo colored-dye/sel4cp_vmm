@@ -287,7 +287,7 @@ init(void)
     regs.x0 = GUEST_DTB_VADDR;
     regs.spsr = 5; // PMODE_EL1h
     regs.pc = guest_ram_vaddr + 0x80000;
-    // dump_ctx(&regs);
+    dump_ctx(&regs);
     err = seL4_TCB_WriteRegisters(
         BASE_VM_TCB_CAP + VM_ID,
         false, // We'll explcitly start the guest below rather than in this call

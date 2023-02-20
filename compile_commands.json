@@ -1,0 +1,178 @@
+[
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/util.o",
+            "src/util/util.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/util/util.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/smc.o",
+            "src/smc.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/smc.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/vgic.o",
+            "src/vgic/vgic.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/vgic/vgic.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/psci.o",
+            "src/psci.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/psci.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/vgic_v2.o",
+            "src/vgic/vgic_v2.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/vgic/vgic_v2.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/fault.o",
+            "src/fault.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/fault.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/printf.o",
+            "src/util/printf.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/util/printf.c"
+    },
+    {
+        "arguments": [
+            "aarch64-linux-gnu-gcc",
+            "-c",
+            "-mstrict-align",
+            "-nostdlib",
+            "-ffreestanding",
+            "-g3",
+            "-Wall",
+            "-Wno-unused-function",
+            "-Werror",
+            "-I/home/colored-dye/sel4cp_vmm/sel4cp/release/sel4cp-sdk-1.2.6/board/qemu_arm_virt_hyp/debug/include",
+            "-DBOARD_qemu_arm_virt_hyp",
+            "-DARCH_aarch64",
+            "-mcpu=cortex-a53",
+            "-o",
+            "build/vmm.o",
+            "src/vmm.c"
+        ],
+        "directory": "/home/colored-dye/sel4cp_vmm",
+        "file": "src/vmm.c"
+    }
+]

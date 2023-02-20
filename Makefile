@@ -97,7 +97,7 @@ LIBS := -lsel4cp -Tsel4cp.ld
 
 IMAGE_FILE = $(BUILD_DIR)/loader.img
 REPORT_FILE = $(BUILD_DIR)/report.txt
-PAYLOAD_FILE = $(BUILD_DIR)/platform/generic/firmware/fw_payload.elf
+# PAYLOAD_FILE = $(BUILD_DIR)/platform/generic/firmware/fw_payload.elf
 
 all: directories $(BUILD_DIR)/$(DTB_IMAGE) $(IMAGE_FILE)
 
